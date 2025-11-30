@@ -6,5 +6,5 @@ export const Protected = () => {
     <div>
         <Outlet />
     </div>
-  )
-}
+  );
+};
