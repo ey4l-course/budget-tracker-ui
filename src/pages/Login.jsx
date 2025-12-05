@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { Link } from 'react-router-dom';
-import "../assets/Public.css"
+// import "../assets/Public.css"
 
 export const Login = () => {
   const [userName, setUserName] = useState ("");
@@ -16,13 +16,13 @@ export const Login = () => {
 
   return (
       <form onSubmit = { handleLogin } >
-        <div className="formFields">
+        <div className="form-fields">
           <input type="text"
           name = "userName"
           placeholder = "Username"
           onChange = {e => {setUserName(e.target.value); setError("")}} />
         </div>
-        <div className="formFields">
+        <div className="form-fields">
           <input type="password"
           name = "password"
           placeholder = "Password"
