@@ -6,14 +6,9 @@ import { checkPasswordRules } from '../utilities/validator.js'
 export const Register = () => {
   const [formData, setFormData] = useState ({});
   const [formValidity, setFormValidity] = useState ({});
-  // const [trackPwdRules, setTrackPwdRules] = useState(
-  //   {capital:false, small:false, digit: false, symbol: false, length:false}
-  // );
 
   const updateFormData = (name, value) => {
-    if (name === "password") {
-      setTrackPwdRules(checkPasswordRules(value));
-    }
+
     setFormData(prev => ({ ...prev, [name]: value }));
   };
   const updateFormValidity = (name, isValid) => {
@@ -25,10 +20,6 @@ export const Register = () => {
     console.log("Submitting:", formData);
   };
 
-  // const validatePassword = (val) => {
-  //   setFormData[password](val);
-  //   setTrackPwdRules(checkPasswordRules(val));
-  // };
   return (
     <div className="registration-form">
       <form onSubmit={handleRegister}>

@@ -4,7 +4,13 @@ import { checkPasswordRules } from '../utilities/validator';
 
 export const FormField = ({name, type, value, placeholder, validator, onChange, onValidityChange}) => {
     const [focus, setFocus] = useState(false);
-    const [pwdRules, setPwdRules] = useState(null);
+    const [pwdRules, setPwdRules] = useState({
+      capital: false,
+      small: false,
+      digit: false,
+      symbol: false,
+      length: false
+    });
 
     const handleInput = (e) => {
         const val = e.target.value;
