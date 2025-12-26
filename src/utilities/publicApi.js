@@ -1,25 +1,19 @@
-import { data } from "react-router-dom";
 const BASE = import.meta.env.VITE_API_BASE;
 
 export const checkUsername = async (username) => {
     try {
         const res = await fetch (
-            `${BASE}/check-username?username=${username}`,
-            { method: "GET", headers: {"Content-Type": "application/json"} }
+            `${BASE}/check-username?username=${encodeURIComponent(username)}`,
+            { method: "GET", headers: {"Accept": "application/json"} }
         )
-        const result = { status: res.status };
-        if (res.status === 400) result.message = await res.text();
-        if (res.status === 500) {
-            result.message = await res.text();
-            result.logID = res.headers.get("X-log-ID") || null;
+        if (res.status === 500){
+            const logID = await res.headers.get("X-log-ID") || null;
+            console.error({ message: "internal server error", logID })
+            return null;
         }
-        return result;
+        return await res.json(); // Expected {"username": "johndoe", "message":"available/taken/invalid"}
     }catch (e) {
-        return {
-            error: true,
-            status: "NETWORK",
-            message: "Unable to reach server",
-            details: e.message
-        }
+        console.error({ message: "Unable to reach server", details: e.message })
+        return null;
     }
 }
