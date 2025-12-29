@@ -13,6 +13,6 @@ export const formFields =
     {name: "city", type: "text", validator: validateName, placeholder: "city"},
     {name: "street", type: "text", validator: validateName, placeholder: "street"},
     {name: "house", type: "text", validator: validateNumeric, placeholder: "house"},
-    {name: "apartment", type: "text", validator: validateNumeric, placeholder: "apartment"},
+    {name: "apartment", type: "text", validator: validateNumeric, placeholder: "apartment (if N/A enter 0)"},
     {name: "zipcode", type: "text", validator: validateZip, placeholder: "zipcode"}
 ]

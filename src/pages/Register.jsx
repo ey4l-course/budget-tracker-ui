@@ -1,11 +1,24 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { formFields } from "../config/formConfig.js"
 import { FormField } from '../components/FormField'
-import { checkPasswordRules } from '../utilities/validator.js'
 
 export const Register = () => {
   const [formData, setFormData] = useState ({});
   const [formValidity, setFormValidity] = useState ({});
+  const [isFormOk, setIsFormOk] = useState (false);
+
+  useEffect(() => {
+    const allFieldsValid = formFields.every(field => {
+      return formValidity[field.name] === true;
+    });
+
+    const allFieldsFilled = formFields.every(field => {
+      const val = formData[field.name];
+      return val !== undefined && val !== "";
+    });
+
+    setIsFormOk(allFieldsValid && allFieldsFilled);
+  }, [formData, formValidity]);
 
   const updateFormData = (name, value) => {
 
@@ -35,7 +48,7 @@ export const Register = () => {
             onValidityChange={updateFormValidity}
           />
         ))}
-        <button type = "submit">Register</button>
+        <button type = "submit" disabled = {!isFormOk}>Register</button>
       </form>
     </div>
   )

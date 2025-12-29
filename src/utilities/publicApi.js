@@ -11,9 +11,39 @@ export const checkUsername = async (username) => {
             console.error({ message: "internal server error", logID })
             return null;
         }
-        return await res.json(); // Expected {"username": "johndoe", "message":"available/taken/invalid"}
+        return await res.json();
     }catch (e) {
         console.error({ message: "Unable to reach server", details: e.message })
         return null;
     }
+}
+
+export const register = async (user) => {
+    try {
+        const res = await fetch (
+            `${BASE}/register`,
+            {
+                method: "POST",
+                headers: {"content-type": "application/json"},
+                body: user
+            }
+        )
+        if (res.status === 500){
+            const logID = await res.headers.get("X-log-ID") || null;
+            return {
+                status: 500,
+                message: "Internal server error",
+                logID: logID === null ? "Unable to retrieve log ID" : logID
+            };
+        } else {
+            return await res.json();
+        }
+    } catch (e) {
+        return {
+            status: "NETWORK",
+            message: "Network error",
+            details: e.message
+        };
+    }
+    
 }
