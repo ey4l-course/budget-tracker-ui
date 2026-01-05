@@ -3,7 +3,7 @@ const BASE = import.meta.env.VITE_API_BASE;
 export const checkUsername = async (username) => {
     try {
         const res = await fetch (
-            `${BASE}/check-username?username=${encodeURIComponent(username)}`,
+            `${BASE}/public/check-username?username=${encodeURIComponent(username)}`,
             { method: "GET", headers: {"Accept": "application/json"} }
         )
         if (res.status === 500){
