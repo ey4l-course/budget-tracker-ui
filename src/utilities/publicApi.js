@@ -21,7 +21,7 @@ export const checkUsername = async (username) => {
 export const register = async (user) => {
     try {
         const res = await fetch (
-            `${BASE}/register`,
+            `${BASE}/public/register`,
             {
                 method: "POST",
                 headers: {"content-type": "application/json"},

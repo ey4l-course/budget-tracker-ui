@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { formFields } from "../config/formConfig.js"
 import { FormField } from '../components/FormField'
+import { register } from '../utilities/publicApi.js';
 
 export const Register = () => {
   const [formData, setFormData] = useState ({});
@@ -28,9 +29,17 @@ export const Register = () => {
     setFormValidity(prev => ({ ...prev, [name]: isValid }));
   };
 
+  const handleReset = () => {
+    setFormData({});
+    setFormValidity({});
+    setIsFormOk(false);    
+  }
+
   const handleRegister = (e) => {
     e.preventDefault();
     console.log("Submitting:", formData);
+    const res = register(formData);
+    console.log(res);
   };
 
   return (
@@ -49,6 +58,7 @@ export const Register = () => {
           />
         ))}
         <button type = "submit" disabled = {!isFormOk}>Register</button>
+        <button type="button" onClick={handleReset}>Reset form</button>
       </form>
     </div>
   )

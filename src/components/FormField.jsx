@@ -19,7 +19,7 @@ export const FormField = ({name, type, value, placeholder, validator, onChange, 
       const val = e.target.value;
       if (name === "username" && val){
         const res = await checkUsername(val);
-        if (res && res.username === val && res.message !== "available"){
+        if (res && res.fieldValue === val && res.message !== "Username available"){
           setError(res.message);
           onValidityChange(name, false);
         }
