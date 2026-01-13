@@ -25,7 +25,7 @@ export const register = async (user) => {
             {
                 method: "POST",
                 headers: {"content-type": "application/json"},
-                body: user
+                body: JSON.stringify(user)
             }
         )
         if (res.status === 500){

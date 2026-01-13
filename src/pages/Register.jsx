@@ -21,8 +21,7 @@ export const Register = () => {
     setIsFormOk(allFieldsValid && allFieldsFilled);
   }, [formData, formValidity]);
 
-  const updateFormData = (name, value) => {
-
+  const updateFormData = (name, value) => {    
     setFormData(prev => ({ ...prev, [name]: value }));
   };
   const updateFormValidity = (name, isValid) => {
