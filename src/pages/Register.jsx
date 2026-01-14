@@ -2,6 +2,9 @@ import React, { useEffect, useState } from 'react'
 import { formFields } from "../config/formConfig.js"
 import { FormField } from '../components/FormField'
 import { register } from '../utilities/publicApi.js';
+import { flattenForm, packForm } from '../utilities/formHelpers.js';
+
+const flatForm = flattenForm (formFields);
 
 export const Register = () => {
   const [formData, setFormData] = useState ({});
@@ -9,12 +12,12 @@ export const Register = () => {
   const [isFormOk, setIsFormOk] = useState (false);
 
   useEffect(() => {
-    const allFieldsValid = formFields.every(field => {
-      return formValidity[field.name] === true;
+    const allFieldsValid = flatForm.every(field => {
+      return formValidity[field.path] === true;
     });
 
-    const allFieldsFilled = formFields.every(field => {
-      const val = formData[field.name];
+    const allFieldsFilled = flatForm.every(field => {
+      const val = formData[field.path];
       return val !== undefined && val !== "";
     });
 
@@ -37,19 +40,20 @@ export const Register = () => {
   const handleRegister = (e) => {
     e.preventDefault();
     console.log("Submitting:", formData);
-    const res = register(formData);
+    const structuredData = packForm(formData)
+    const res = register(structuredData);
     console.log(res);
   };
 
   return (
     <div className="registration-form">
       <form onSubmit={handleRegister}>
-        {formFields.map(field => (
+        {flatForm.map(field => (
           <FormField
-            key={field.name}
-            name={field.name}
+            key={field.path}
+            name={field.path}
             type={field.type}
-            value={formData[field.name]}
+            value={formData[field.path]}
             placeholder={field.placeholder}
             validator={field.validator}
             onChange={updateFormData}
