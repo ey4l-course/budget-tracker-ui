@@ -1,4 +1,4 @@
-import { createBrowserRouter, redirect, RouterProvider } from "react-router-dom";
+import { createBrowserRouter, redirect } from "react-router-dom";
 import { Login } from "./pages/Login";
 import { Register } from "./pages/Register";
 import { Public } from "./layouts/Public";
@@ -15,13 +15,13 @@ const requireAuth = async () => {
   return null;
 };
 
-const router = createBrowserRouter([
+export default createBrowserRouter([
   {
     path: "/",
     element: <Public />,
     children:
     [
-      { index: true, element: <div>test</div> },
+      { index: true, element: <Login /> },
       { path: "login", element: <Login /> },
       { path: "register", element: <Register /> },
     ]
@@ -38,7 +38,3 @@ const router = createBrowserRouter([
     ]
   }
 ]);
-
-export default function App(){
-  return ;
-}
