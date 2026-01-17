@@ -36,7 +36,10 @@ export const register = async (user) => {
                 logID: logID === null ? "Unable to retrieve log ID" : logID
             };
         } else {
-            return await res.json();
+            return {
+                status: res.status,
+                message: await res.json()
+            };
         }
     } catch (e) {
         return {

@@ -3,6 +3,7 @@ import { formFields } from "../config/formConfig.js"
 import { FormField } from '../components/FormField'
 import { register } from '../utilities/publicApi.js';
 import { flattenForm, packForm } from '../utilities/formHelpers.js';
+import { useNavigate } from 'react-router-dom';
 
 const flatForm = flattenForm (formFields);
 
@@ -10,6 +11,10 @@ export const Register = () => {
   const [formData, setFormData] = useState ({});
   const [formValidity, setFormValidity] = useState ({});
   const [isFormOk, setIsFormOk] = useState (false);
+  const [error, setError] = useState ("");
+  const [success, setSuccess] = useState(false);
+
+  const navigate = useNavigate();
 
   useEffect(() => {
     const allFieldsValid = flatForm.every(field => {
@@ -37,17 +42,31 @@ export const Register = () => {
     setIsFormOk(false);    
   }
 
-  const handleRegister = (e) => {
+  const handleRegister = async (e) => {
     e.preventDefault();
-    console.log("Submitting:", formData);
     const structuredData = packForm(formData)
-    const res = register(structuredData);
-    console.log(res);
+    const res = await register(structuredData);
+    if (res.status === 201){
+      setSuccess(true);
+      setTimeout(() => {
+        navigate("/login");
+      }, 1000);
+    }else if (res.status === 400){
+      setError(res.message)
+    }else{
+
+    }
   };
 
   return (
     <div className="registration-form">
-      <form onSubmit={handleRegister}>
+      {success &&
+          <div className="success-message" role="alert">
+            <h2>User sucsessfuly created</h2>
+            <p>Redirecting...</p>
+          </div>
+      }
+      <form onSubmit={handleRegister} style={{ opacity: success ? 0.5 : 1, pointerEvents: success ? 'none' : 'auto' }}>
         {flatForm.map(field => (
           <FormField
             key={field.path}
@@ -61,6 +80,7 @@ export const Register = () => {
           />
         ))}
         <button type = "submit" disabled = {!isFormOk}>Register</button>
+        {error && <div className="form-error" role="alert">{error}</div>}
         <button type="button" onClick={handleReset}>Reset form</button>
       </form>
     </div>

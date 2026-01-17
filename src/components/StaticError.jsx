@@ -1,5 +1,6 @@
 import React from "react";
 
+
 export const StaticError = ({error}) => {
     return(
         <div className="main">
@@ -9,7 +10,7 @@ export const StaticError = ({error}) => {
         </div>
         {error.status === 500 && (
             <div>
-                {/* <img src="someImage.gif"/> */}
+                <img src="../assets/errorMsg.png"/>
                 <h1> Hmmm... This is awkward...</h1>
                 <h3>guess it could happen</h3>
                 <h5>Please contact us with log ID: {error.logID}</h5>
