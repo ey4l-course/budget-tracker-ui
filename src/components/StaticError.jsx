@@ -1,28 +1,60 @@
-import React from "react";
+import React, { useEffect } from "react";
+import { useLocation, useNavigate, Link } from "react-router-dom";
+import "../assets/ErrorPage.css";
+import errImg from "../assets/errorMsg.png"
 
+export const StaticError = () => {
+    const location = useLocation();
+    const nav = useNavigate();
+    const err = location.state?.error;
 
-export const StaticError = ({error}) => {
-    return(
+    useEffect(() => {
+        if (!err)
+            nav("/login");
+    }, [err, nav]);
+    
+    if (!err){
+        return null;
+    }
+
+    const mailtoHref = `mailto:support@app.local?subject=ticket ${err.logID || "Unknown"}`;
+
+return (
         <div className="main">
-            <div className="title">
-            <h1>Personal budget tracker</h1>
-            <h3>control your every-day finance</h3>
-        </div>
-        {error.status === 500 && (
-            <div>
-                <img src="../assets/errorMsg.png"/>
-                <h1> Hmmm... This is awkward...</h1>
-                <h3>guess it could happen</h3>
-                <h5>Please contact us with log ID: {error.logID}</h5>
+            <div className="error-content-wrapper">
+                <img src={errImg} alt="Error illustration" className="error-illustration" />
+
+                {err.status === 500 && (
+                    <div className="error-message-group">
+                        <h2>Hmmm... This is awkward...</h2>
+                        <p>guess it could happen</p>
+                        
+                        <div className="log-id-container">
+                            <span className="log-id-text">Log ID: {err.logID}</span>
+                        </div>
+
+                        <div className="error-footer">
+                            <a href={mailtoHref} className="contact-link">
+                                <button type="button">Contact us</button>
+                            </a>
+                        </div>
+                    </div>
+                )}
+
+                {err.status === "NETWORK" && (
+                    <div className="error-message-group">
+                        <h2>Network error</h2>
+                        <p>Description: {err.details}</p>
+                        <button type="button" onClick={() => window.location.reload()}>
+                            Retry Connection
+                        </button>
+                    </div>
+                )}
+
+                <footer className="back-to-login">
+                    <Link to="/login">Back to Login</Link>
+                </footer>
             </div>
-        )}
-        {error.status === "NETWORK" && (
-            <div>
-                {/* <img src="someImage.gif"/> */}
-                <h1>Network error</h1>
-                <h3>Description: {error.details}</h3>
-            </div>        
-        )}
-    </div>
-    )
+        </div>
+    );
 }

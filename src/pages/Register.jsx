@@ -54,7 +54,7 @@ export const Register = () => {
     }else if (res.status === 400){
       setError(res.message)
     }else{
-
+      navigate("/error", {state: {error: res}})
     }
   };
 
