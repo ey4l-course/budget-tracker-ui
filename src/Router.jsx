@@ -31,7 +31,7 @@ export default createBrowserRouter([
   {
     path: "/app",
     element: <Protected />,
-    loader: requireAuth,
+    // loader: requireAuth,
     children:
     [
       {index: true, element: <Dashboard />},

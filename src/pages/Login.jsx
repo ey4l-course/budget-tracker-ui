@@ -1,8 +1,9 @@
 import React, { useState } from 'react'
-import { Link } from 'react-router-dom';
-// import "../assets/Public.css"
+import { Link, useNavigate } from 'react-router-dom';
+import { login } from '../utilities/publicApi';
 
 export const Login = () => {
+  const navigate = useNavigate ();
   const [userName, setUserName] = useState ("");
   const [password, setPassword] = useState ("");
   const [pending, setPending] = useState (false);
@@ -10,8 +11,18 @@ export const Login = () => {
 
   const handleLogin = async (e) => {
     e.preventDefault();
+    const user = {"username": userName, "password": password};
     setPending(true);
-    setError("");
+    const res = await login(user)
+    if (res.status === 200){
+      setUserName ("");
+      setPassword ("");
+      setError ("");
+      navigate("/app/dashboard", user.username)  
+    }else {
+      console.error ("Generated error:" +res.message)
+    }
+    setPending(false);
   }
 
   return (
@@ -20,15 +31,15 @@ export const Login = () => {
           <input type="text"
           name = "userName"
           placeholder = "Username"
-          onChange = {e => {setUserName(e.target.value); setError("")}} />
+          onChange = {e => {setUserName(e.target.value)}} />
         </div>
         <div className="form-fields">
           <input type="password"
           name = "password"
           placeholder = "Password"
-          onChange = {e => {setPassword(e.target.value); setError("")}} />
+          onChange = {e => {setPassword(e.target.value)}} />
         </div>
-          <button type = "submit" disabled = {pending || userName.length < 4 || password.length < 8 || error !== ""}>
+          <button type = "submit" disabled = {pending || userName.length < 4 || password.length < 8}>
             {pending ? "Processing..." : "Login"}
           </button>
         {error && <div className="form-error" role = "alert">{error}</div>}

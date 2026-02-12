@@ -1,4 +1,5 @@
 const BASE = import.meta.env.VITE_API_BASE;
+const HEADERS = {"content-type": "application/json"}
 
 export const checkUsername = async (username) => {
     try {
@@ -24,7 +25,7 @@ export const register = async (user) => {
             `${BASE}/public/register`,
             {
                 method: "POST",
-                headers: {"content-type": "application/json"},
+                headers: HEADERS,
                 body: JSON.stringify(user)
             }
         )
@@ -48,5 +49,37 @@ export const register = async (user) => {
             details: e.message
         };
     }
-    
+}
+
+export const login = async (user) => {
+    try {
+        const res = await fetch (
+            `${BASE}/public/login`,
+            {
+                method: "POST",
+                credentials: "include",
+                headers: HEADERS,
+                body: JSON.stringify(user)
+            }
+        )
+        if (res.status === 500){
+            const logID = await res.headers.get("X-log-ID") || null;
+            return {
+                status: 500,
+                message: "Internal server error",
+                logID: logID === null ? "Unable to retrieve log ID" : logID
+            };
+        } else {
+            return {
+                status: res.status,
+                message: await res.json()
+            };
+        }
+    }catch (e) {
+        return {
+            status: "NETWORK",
+            message: "Network error",
+            details: e.message
+        };
+    }
 }
