@@ -18,9 +18,11 @@ export const Login = () => {
       setUserName ("");
       setPassword ("");
       setError ("");
-      navigate("/app/dashboard", user.username)  
+      navigate("/app/dashboard", {state: { res }})
+    }else if (res.status === 401){
+      setError(res.message)
     }else {
-      console.error ("Generated error:" +res.message)
+      navigate("/error", {state: { error: res }})
     }
     setPending(false);
   }

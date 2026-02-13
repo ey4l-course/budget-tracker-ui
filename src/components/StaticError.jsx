@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import { useLocation, useNavigate, Link } from "react-router-dom";
 import "../assets/ErrorPage.css";
 import errImg from "../assets/errorMsg.png"
+import ntwrkErrImg from "../assets/networkErrorMsg.png"
 
 export const StaticError = () => {
     const location = useLocation();
@@ -22,10 +23,10 @@ export const StaticError = () => {
 return (
         <div className="main">
             <div className="error-content-wrapper">
-                <img src={errImg} alt="Error illustration" className="error-illustration" />
 
                 {err.status === 500 && (
                     <div className="error-message-group">
+                        <img src={errImg} alt="Error illustration" className="error-illustration" />
                         <h2>Hmmm... This is awkward...</h2>
                         <p>guess it could happen</p>
                         
@@ -43,6 +44,7 @@ return (
 
                 {err.status === "NETWORK" && (
                     <div className="error-message-group">
+                        <img src={ntwrkErrImg} alt="Network Error illustration" className="error-illustration" />
                         <h2>Network error</h2>
                         <p>Description: {err.details}</p>
                         <button type="button" onClick={() => window.location.reload()}>
