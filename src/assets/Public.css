@@ -1,3 +1,4 @@
+/* FILE: src/assets/Public.css */
 /* ===== Theme tokens ===== */
 :root{
   --bg: #f4f6f8;
@@ -15,7 +16,7 @@
 
 /* ===== Global ===== */
 * { box-sizing: border-box; }
-html, body { height: 100%; }
+html, body { min-height: 100dvh; } /* RESPONSIVITY CHANGE: height: 100% -> min-height: 100dvh */
 body{
   margin: 0;
   font-family: system-ui, -apple-system, "Segoe UI", Roboto, Arial, "Noto Sans";
@@ -25,7 +26,7 @@ body{
 
 /* ===== Card container (centers the form) ===== */
 .main{
-  max-width: 440px;                 /* central column width */
+  max-width: 440px;                  /* central column width */
   margin: 48px auto;                 /* centers horizontally */
   padding: 24px;
   background: var(--card);
@@ -182,7 +183,7 @@ input[aria-invalid="true"]{
 button{
   display: inline-block;
   width: 100%;                       /* button fits form width by default */
-  padding: 12px 14px;
+  /* padding: 12px 14px; */
   border: 0;
   border-radius: 10px;
   background: var(--primary);
@@ -200,7 +201,7 @@ button[disabled]{
   background: #b7c7e4;               /* muted primary */
   opacity: .8;
   cursor: not-allowed;
-  pointer-events: none;               /* ignore hover/click */
+  pointer-events: none;              /* ignore hover/click */
   filter: none;
   transform: none;
 }
