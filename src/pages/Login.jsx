@@ -14,15 +14,16 @@ export const Login = () => {
     const user = {"username": userName, "password": password};
     setPending(true);
     const res = await login(user)
-    if (res.status === 200){
+    if (res.do === "render")
+      setError(res.message)
+    if (res.do === "nav"){
       setUserName ("");
       setPassword ("");
       setError ("");
-      navigate("/app/dashboard", {state: { res }})
-    }else if (res.status === 401){
-      setError(res.message)
-    }else {
-      navigate("/error", {state: { error: res }})
+      if (res.path != "/error"){
+        sessionStorage.setItem("name", res.message);
+      }
+      navigate(`${res.path}`, {state: {logId: res.logID, message: res.message}})
     }
     setPending(false);
   }

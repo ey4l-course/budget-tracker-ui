@@ -7,7 +7,7 @@ import ntwrkErrImg from "../assets/networkErrorMsg.png"
 export const StaticError = () => {
     const location = useLocation();
     const nav = useNavigate();
-    const err = location.state?.error;
+    const err = location.state;
 
     useEffect(() => {
         if (!err)
@@ -24,14 +24,14 @@ return (
         <div className="main">
             <div className="error-content-wrapper">
 
-                {err.status === 500 && (
+                {err.message !== "Network error" && (
                     <div className="error-message-group">
                         <img src={errImg} alt="Error illustration" className="error-illustration" />
                         <h2>Hmmm... This is awkward...</h2>
                         <p>guess it could happen</p>
                         
                         <div className="log-id-container">
-                            <span className="log-id-text">Log ID: {err.logID}</span>
+                            <span className="log-id-text">Log ID: {err.logId}</span>
                         </div>
 
                         <div className="error-footer">
@@ -42,11 +42,11 @@ return (
                     </div>
                 )}
 
-                {err.status === "NETWORK" && (
+                {err.message === "Network error" && (
                     <div className="error-message-group">
                         <img src={ntwrkErrImg} alt="Network Error illustration" className="error-illustration" />
                         <h2>Network error</h2>
-                        <p>Description: {err.details}</p>
+                        <p>Description: {err.message}</p>
                         <button type="button" onClick={() => window.location.reload()}>
                             Retry Connection
                         </button>

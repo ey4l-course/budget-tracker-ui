@@ -29,25 +29,35 @@ export const register = async (user) => {
                 body: JSON.stringify(user)
             }
         )
+        const logID = await res.headers.get("X-log-ID") || null;
         if (res.status === 500){
-            const logID = await res.headers.get("X-log-ID") || null;
             return {
                 status: 500,
                 message: "Internal server error",
                 logID: logID === null ? "Unable to retrieve log ID" : logID
             };
         } else {
+            const data = await res.json();
             return {
                 status: res.status,
-                message: await res.json()
+                message: data.message
             };
         }
-    } catch (e) {
-        return {
-            status: "NETWORK",
-            message: "Network error",
-            details: e.message
-        };
+    }catch (e) {
+        if (e.name === "TypeError")
+            return {
+                do: "nav",
+                path: "/error",
+                message: "Network error",
+                logID: null
+            };
+        if (e.name === "SyntaxError")
+            return {
+                do: "nav",
+                path: "/error",
+                message: "Network error",
+                logID: null
+            };
     }
 }
 
@@ -62,24 +72,38 @@ export const login = async (user) => {
                 body: JSON.stringify(user)
             }
         )
-        if (res.status === 500){
-            const logID = await res.headers.get("X-log-ID") || null;
-            return {
-                status: 500,
-                message: "Internal server error",
-                logID: logID === null ? "Unable to retrieve log ID" : logID
-            };
-        } else {
-            return {
-                status: res.status,
-                message: await res.json()
-            };
+        const logID = res.headers.get("X-log-ID") || null;
+        const data = await res.json();
+        const givenName= data.givenName || "";
+        const surname= data.surname || "";
+        if (res.status === 500 || res.status === 200){
+                return {
+                    do: "nav",
+                    path: res.status === 200 ? "/app/dashboard" : "/error",
+                    message: res.status === 200
+                        ? [givenName, surname].filter(Boolean).join(" ")
+                        : "Internal server error",
+                    logID: logID === null ? "Unable to retrieve log ID" : logID
+                };
+        }
+        return {
+            do: "render",
+            message: data.error
         }
     }catch (e) {
-        return {
-            status: "NETWORK",
-            message: "Network error",
-            details: e.message
-        };
+        if (e.name === "TypeError")
+            return {
+                do: "nav",
+                path: "/error",
+                message: "Network error",
+                logID: null
+            };
+        if (e.name === "SyntaxError")
+            return {
+                do: "nav",
+                path: "/error",
+                message: "Network error",
+                logID: null
+            };
     }
 }
