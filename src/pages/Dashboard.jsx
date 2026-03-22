@@ -1,15 +1,18 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { useLocation, useNavigate, Link } from 'react-router-dom';
+import { MonthPicker } from '../components/MonthPicker';
+import { CategoryCard } from '../components/CategoryCard';
+
 
 export const Dashboard = () => {
   const location = useLocation();
   const nav = useNavigate();
   const user = location.state;
-  console.log(user);
+  const [txn, setTxn] = useState([]);
   return (
     <div>
-      <h1>Dashboard</h1>
-      <p>Welcome! You are logged in.</p>
+      <MonthPicker />
+      <CategoryCard />
     </div>
   );
 };
