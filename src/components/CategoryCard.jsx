@@ -1,23 +1,11 @@
 import React, { useState } from 'react'
 import { useLocation } from 'react-router-dom'
 import { ChevronDown, EllipsisVertical } from 'lucide-react';
+import { ExpenseItem } from './ExpenseItem';
 
-export const CategoryCard = () => {
+export const CategoryCard = ({category}) => {
     const location = useLocation();
-    const category =   {
-    "name": "bills",
-    "subtotal": 2579.00,
-    "content": [
-      {"id":4,"name":"Electric Corp","date":"22-03-2026","amount":430.00,"comment":null,"flag":0},
-      {"id":10,"name":"Arnona","date":"22-03-2026","amount":1200.00,"comment":null,"flag":0},
-      {"id":15,"name":"Water Bill","date":"22-03-2026","amount":210.00,"comment":null,"flag":0},
-      {"id":20,"name":"Cellcom","date":"22-03-2026","amount":99.00,"comment":null,"flag":0},
-      {"id":25,"name":"Tax Service","date":"22-03-2026","amount":300.00,"comment":null,"flag":0},
-      {"id":32,"name":"Internet Fiber","date":"22-03-2026","amount":120.00,"comment":null,"flag":0},
-      {"id":37,"name":"Amazon AWS","date":"22-03-2026","amount":40.00,"comment":null,"flag":0},
-      {"id":38,"name":"Gas Bill","date":"22-03-2026","amount":180.00,"comment":null,"flag":0}
-    ]
-  };
+
 
   const [isOpen,setIsOpen] = useState(false);
 
@@ -57,12 +45,10 @@ export const CategoryCard = () => {
         <section className="details-section">
             <ul>
                 {category.content.map((expense) => (
-                <li key={expense.id}>
-                    <div className="expanse-item">
-                    <span>{expense.name}</span>
-                    <span>{expense.amount}</span>
-                    </div>
-                </li>
+                  <ExpenseItem 
+                    key={expense.id}
+                    expenseItem = {expense}
+                  />
                 ))}
             </ul>
         </section>

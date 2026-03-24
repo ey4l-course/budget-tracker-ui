@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import { useLocation, useNavigate, Link } from 'react-router-dom';
 import { MonthPicker } from '../components/MonthPicker';
 import { CategoryCard } from '../components/CategoryCard';
+import dummy from "../utilities/dev/dummy.json"
 
 
 export const Dashboard = () => {
@@ -9,10 +10,16 @@ export const Dashboard = () => {
   const nav = useNavigate();
   const user = location.state;
   const [txn, setTxn] = useState([]);
+      const category = dummy;
   return (
     <div>
       <MonthPicker />
-      <CategoryCard />
+          {dummy.map (category => (
+        <CategoryCard 
+          key={category.name}
+          category = {category}
+        />
+      ))};
     </div>
   );
 };

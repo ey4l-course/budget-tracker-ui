@@ -1,0 +1,76 @@
+[
+  {
+    "name": "bills",
+    "subtotal": 2579.00,
+    "content": [
+      {"id":4,"name":"Electric Corp","date":"22-03-2026","amount":430.00,"comment":null,"flag":0},
+      {"id":10,"name":"Arnona","date":"22-03-2026","amount":1200.00,"comment":null,"flag":0},
+      {"id":15,"name":"Water Bill","date":"22-03-2026","amount":210.00,"comment":null,"flag":0},
+      {"id":20,"name":"Cellcom","date":"22-03-2026","amount":99.00,"comment":null,"flag":0},
+      {"id":25,"name":"Tax Service","date":"22-03-2026","amount":300.00,"comment":null,"flag":0},
+      {"id":32,"name":"Internet Fiber","date":"22-03-2026","amount":120.00,"comment":null,"flag":0},
+      {"id":37,"name":"Amazon AWS","date":"22-03-2026","amount":40.00,"comment":null,"flag":0},
+      {"id":38,"name":"Gas Bill","date":"22-03-2026","amount":180.00,"comment":null,"flag":0}
+    ]
+  },
+  {
+    "name": "education",
+    "subtotal": 11345.00,
+    "content": [
+      {"id":3,"name":"Technion","date":"22-03-2026","amount":5000.00,"comment":null,"flag":0},
+      {"id":9,"name":"Udemy","date":"22-03-2026","amount":45.00,"comment":null,"flag":0},
+      {"id":14,"name":"Coursera","date":"22-03-2026","amount":180.00,"comment":null,"flag":0},
+      {"id":19,"name":"Book Store","date":"22-03-2026","amount":85.00,"comment":null,"flag":0},
+      {"id":24,"name":"Library Fee","date":"22-03-2026","amount":20.00,"comment":null,"flag":0},
+      {"id":29,"name":"Tuition","date":"22-03-2026","amount":6000.00,"comment":null,"flag":0},
+      {"id":36,"name":"University Sub","date":"22-03-2026","amount":15.00,"comment":null,"flag":0}
+    ]
+  },
+  {
+    "name": "groceries",
+    "subtotal": 1546.00,
+    "content": [
+      {"id":1,"name":"Shufersal","date":"22-03-2026","amount":450.50,"comment":null,"flag":0},
+      {"id":7,"name":"Rami Levy","date":"22-03-2026","amount":120.30,"comment":null,"flag":0},
+      {"id":12,"name":"Victory","date":"22-03-2026","amount":150.20,"comment":null,"flag":0},
+      {"id":17,"name":"Tiv Taam","date":"22-03-2026","amount":600.00,"comment":null,"flag":0},
+      {"id":22,"name":"Unknown Cafe","date":"22-03-2026","amount":45.00,"comment":null,"flag":0},
+      {"id":30,"name":"Bakery","date":"22-03-2026","amount":25.00,"comment":null,"flag":0},
+      {"id":34,"name":"Super-Pharm","date":"22-03-2026","amount":65.00,"comment":null,"flag":0},
+      {"id":35,"name":"Health Plus","date":"22-03-2026","amount":90.00,"comment":null,"flag":0}
+    ]
+  },
+  {
+    "name": "other",
+    "subtotal": 215.00,
+    "content": [
+      {"id":27,"name":"G-Station X","date":"22-03-2026","amount":90.00,"comment":null,"flag":0},
+      {"id":28,"name":"G-Station Y","date":"22-03-2026","amount":110.00,"comment":null,"flag":0},
+      {"id":40,"name":"Misc Shop","date":"22-03-2026","amount":15.00,"comment":null,"flag":0}
+    ]
+  },
+  {
+    "name": "trips",
+    "subtotal": 12650.00,
+    "content": [
+      {"id":5,"name":"El Al","date":"22-03-2026","amount":3500.00,"comment":null,"flag":0},
+      {"id":11,"name":"Booking.com","date":"22-03-2026","amount":2200.00,"comment":null,"flag":0},
+      {"id":16,"name":"Airbnb","date":"22-03-2026","amount":1800.00,"comment":null,"flag":0},
+      {"id":21,"name":"Hotel Rome","date":"22-03-2026","amount":4500.00,"comment":null,"flag":0},
+      {"id":26,"name":"Passport Office","date":"22-03-2026","amount":250.00,"comment":null,"flag":0},
+      {"id":33,"name":"Duty Free","date":"22-03-2026","amount":400.00,"comment":null,"flag":0}
+    ]
+  },
+  {
+    "name": "vehicle",
+    "subtotal": 2510.00,
+    "content": [
+      {"id":2,"name":"Paz","date":"22-03-2026","amount":280.00,"comment":null,"flag":0},
+      {"id":8,"name":"Sonol","date":"22-03-2026","amount":310.00,"comment":null,"flag":0},
+      {"id":13,"name":"Ten","date":"22-03-2026","amount":250.00,"comment":null,"flag":0},
+      {"id":18,"name":"Dor Alon","date":"22-03-2026","amount":110.00,"comment":null,"flag":0},
+      {"id":23,"name":"Car Wash","date":"22-03-2026","amount":60.00,"comment":null,"flag":0},
+      {"id":31,"name":"Garage Haifa","date":"22-03-2026","amount":1500.00,"comment":null,"flag":0}
+    ]
+  }
+]
