@@ -1,0 +1,48 @@
+/* FILE: src/assets/Protected.css */
+/* Minimal shell for the authenticated layout */
+.protected-layout-root{
+  .app-container {
+    display: flex;
+    flex-direction: column;
+    min-height: 100dvh; /* Adapts to mobile toolbars */
+    width: 100%;
+  }
+
+  .header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 16px 32px;
+    background-color: #ffffff; /* Explicit fallback since var(--card) is in Public.css */
+    border-bottom: 1px solid #d9dee3; 
+  }
+
+  .logo h1 {
+    margin: 0;
+    font-size: 1.5rem; 
+    color: #4a90e2; 
+  }
+
+  .main-menu {
+    display: flex;
+    align-items: center;
+  }
+
+  .content-container {
+    flex: 1; /* Pushes the layout to fill remaining vertical space */
+    padding: 32px;
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto; /* Centers the dashboard on ultra-wide screens */
+  }
+
+  /* Mobile responsivity overrides */
+  @media (max-width: 420px) {
+    .header {
+      padding: 16px;
+    }
+    .content-container {
+      padding: 16px;
+    }
+  }
+}

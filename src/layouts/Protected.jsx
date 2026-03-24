@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { Outlet, replace, useLocation, useNavigate } from 'react-router-dom'
-import "../assets/Protected.css"
+import "./Protected.css"
 import mainMenu from "../assets/menu.svg"
 import {whoAmI} from "../utilities/ProtectedApi.js"
 
@@ -45,21 +45,23 @@ const dayTime = (
   },[])
 
   return (
-    <div className="app-container">
-      <div className="header">
-        <div className="logo">
-          <h1>Budget-tracker</h1>
+    <div className="protected-layout-root">
+      <div className="app-container">
+        <div className="header">
+          <div className="logo">
+            <h1>Budget-tracker</h1>
+          </div>
+          <div className="greeting">
+            {loggedUser && <p>Hello {loggedUser}, good {dayTime}</p>}
+          </div>
+          <div className="main-menu">
+            <img src={mainMenu} alt='menu' />
+          </div>
         </div>
-        <div className="greeting">
-          {loggedUser && <p>Hello {loggedUser}, good {dayTime}</p>}
+        <div className="content-container">
+          {!pending && loggedUser && <Outlet />}
+          {pending && <div className="pending-msg">Verifying session...</div>}
         </div>
-        <div className="main-menu">
-          <img src={mainMenu} alt='menu' />
-        </div>
-      </div>
-      <div className="content-container">
-        {!pending && loggedUser && <Outlet />}
-        {pending && <div className="pending-msg">Verifying session...</div>}
       </div>
     </div>
   );

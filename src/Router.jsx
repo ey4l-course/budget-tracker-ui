@@ -5,7 +5,7 @@ import { Public } from "./layouts/Public";
 import { Protected } from "./layouts/Protected";
 import { Dashboard } from "./pages/Dashboard";
 import { Profiles } from "./pages/Profiles";
-import { StaticError } from "./components/StaticError";
+import { StaticError } from "./pages/StaticError";
 
 const BASE = import.meta.env.VITE_API_BASE;
 

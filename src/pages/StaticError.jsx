@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { useLocation, useNavigate, Link } from "react-router-dom";
-import "../assets/ErrorPage.css";
+import "./StaticError.css";
 import errImg from "../assets/errorMsg.png"
 import ntwrkErrImg from "../assets/networkErrorMsg.png"
 
