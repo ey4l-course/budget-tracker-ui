@@ -52,7 +52,11 @@ const dayTime = (
             <h1>Budget-tracker</h1>
           </div>
           <div className="greeting">
-            {loggedUser && <p>Hello {loggedUser}, good {dayTime}</p>}
+            {loggedUser && (
+              <p>
+                Hello {loggedUser}, <span className = "greeting-time">good {dayTime}</span>
+              </p>
+            )}
           </div>
           <div className="main-menu">
             <img src={mainMenu} alt='menu' />

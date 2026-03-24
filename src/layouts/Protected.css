@@ -37,12 +37,96 @@
   }
 
   /* Mobile responsivity overrides */
-  @media (max-width: 420px) {
-    .header {
-      padding: 16px;
+  @media (max-width: 480px) {
+    .header { padding: 16px; }
+    .content-container { padding: 16px; }
+    
+    .greeting p {
+      font-size: 0.85rem;
     }
-    .content-container {
-      padding: 16px;
+    
+    .greeting-time {
+      display: block; /* Forces the span to drop to the next line exactly at the comma */
     }
+  }
+
+  /* Add this inside .protected-layout-root in Protected.css */
+
+  /* ===== 1. Header & Greeting Fixes ===== */
+  .greeting {
+    text-align: center;
+    flex: 1; /* Allows the greeting to take up available space between logo and menu */
+    padding: 0 10px;
+  }
+  
+  .greeting p {
+    margin: 0;
+    font-size: 1rem;
+    color: #667085; /* A muted gray so it doesn't fight the logo for attention */
+    line-height: 1.2;
+  }
+
+  /* ===== 2. Dashboard Layout ===== */
+  .dashboard-view {
+    display: flex;
+    flex-direction: column;
+    gap: 24px; /* Space between MonthPicker and the cards */
+  }
+
+  .categories-list {
+    display: flex;
+    flex-direction: column;
+    gap: 16px; /* Space between individual cards */
+  }
+
+  /* ===== 3. Month Picker ===== */
+  .month-picker {
+    display: flex;
+    align-items: center;
+    justify-content: space-between; /* Pushes buttons to edges, centers date */
+    background: #f4f6f8;
+    padding: 8px 12px;
+    border-radius: 24px;
+    width: 100%;
+    max-width: 380px; /* Prevents it from getting absurdly wide on desktop */
+    margin: 0 auto; /* Centers the whole component in the view */
+  }
+
+  .month-picker .date-display {
+    display: flex;
+    align-items: center;
+    font-weight: 600;
+    color: #222;
+  }
+
+  /* Standardizing the circular icon buttons */
+  .month-picker .icon-btn {
+    width: 36px;
+    height: 36px;
+    padding: 0;
+    border-radius: 50%;
+    background: #ffffff;
+    color: #4a90e2; /* Primary blue for icons */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.06);
+  }
+
+  .month-picker .icon-btn:hover { background: #f0f4f8; }
+  
+  .month-picker .reset-btn {
+    color: #667085; /* Gray out the reset button so it's less prominent */
+    margin-left: -4px; /* Pulls it slightly closer to the right chevron */
+  }
+
+  /* ===== Mobile Adjustments ===== */
+  @media (max-width: 480px) {
+    .greeting p {
+      font-size: 0.85rem;
+    }
+    .greeting-time {
+    white-space: nowrap;
+  }
   }
 }

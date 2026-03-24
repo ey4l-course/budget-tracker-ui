@@ -12,14 +12,16 @@ export const Dashboard = () => {
   const [txn, setTxn] = useState([]);
       const category = dummy;
   return (
-    <div>
+    <div className = "dashboard-view">
       <MonthPicker />
+      <div className="categories-list">
           {dummy.map (category => (
-        <CategoryCard 
-          key={category.name}
-          category = {category}
-        />
-      ))};
+          <CategoryCard 
+            key={category.name}
+            category = {category}
+          />
+        ))};
+      </div>
     </div>
   );
 };

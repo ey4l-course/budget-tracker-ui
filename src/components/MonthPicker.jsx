@@ -18,60 +18,23 @@ export const MonthPicker = () => {
     });
     
   return (
-    <div style={containerStyle}>
-        <button onClick={() => handleMonthChange(-1)} style={buttonStyle}>
+    <div className = "month-picker">
+        <button onClick={() => handleMonthChange(-1)} className = "icon-btn">
             <ChevronLeft size={20} />
         </button>
 
-        <div style={dateDisplayStyle}>
+        <div className = "date-display">
             <Calendar size={18} style={{marginRight: '8px'}} />
             <span>{displayDate}</span>
         </div>
 
-        <button onClick={() => handleMonthChange(1)} style={buttonStyle}>
+        <button onClick={() => handleMonthChange(1)} className = "icon-btn">
             <ChevronRight size={20} />
         </button>
 
-        <button onClick={resetToday} title='reset to today' style={buttonStyle}>
+        <button onClick={resetToday} title='reset to today' className = "icon-btn reset-btn">
             <RotateCcw size={16} />
         </button>
     </div>
   );
-};
-const containerStyle = {
-  display: 'flex',
-  alignItems: 'center',
-  gap: '10px',
-  background: '#f4f4f4',
-  padding: '8px 16px',
-  borderRadius: '20px',
-  width: 'fit-content',
-  fontFamily: 'sans-serif'
-};
-
-const dateDisplayStyle = {
-  display: 'flex',
-  alignItems: 'center',
-  fontWeight: '600',
-  minWidth: '150px',
-  justifyContent: 'center'
-};
-
-const buttonStyle = {
-  border: 'none',
-  background: '#888',
-  borderRadius: '50%',
-  width: '32px',
-  height: '32px',
-  display: 'flex',
-  alignItems: 'center',
-  justifyContent: 'center',
-  cursor: 'pointer',
-  boxShadow: '0 2px 4px rgba(0,0,0,0.1)'
-};
-
-const resetButtonStyle = {
-  ...buttonStyle,
-  marginLeft: '10px',
-  color: '#666'
 };
