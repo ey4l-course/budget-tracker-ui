@@ -129,4 +129,200 @@
     white-space: nowrap;
   }
   }
+
+/* ===== 4. Category Cards (Premium Layout) ===== */
+  .category-card {
+    display: flex;
+    flex-direction: column;
+    background: #ffffff;
+    border: 1px solid #d9dee3;
+    border-radius: 16px;
+    overflow: hidden; /* CRITICAL: Allows the header's background to respect the rounded corners */
+    box-shadow: 0 4px 12px rgba(16, 24, 40, 0.04);
+    transition: box-shadow 0.2s ease, transform 0.2s ease;
+  }
+
+  .category-card:hover {
+    box-shadow: 0 8px 24px rgba(16, 24, 40, 0.08);
+    transform: translateY(-2px); /* Slight lift effect */
+  }
+
+  #summary-view {
+    display: flex;
+    flex-direction: column;
+  }
+
+  /* The Header - Now edge-to-edge with a background */
+  .category-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #f8fafc; /* Subtle premium slate/blue background */
+    padding: 16px 20px;
+    border-bottom: 1px solid #f1f5f9;
+  }
+
+  .category-header h3 {
+    margin: 0;
+    font-size: 1.15rem;
+    color: #1e293b;
+    font-weight: 600;
+  }
+
+  /* Subtotals & Top Row */
+  .subtotal-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    padding: 20px; /* Padding applied here instead of the main card */
+  }
+
+  .top-row {
+    display: flex; /* Changed from Grid to Flex */
+    justify-content: space-between; /* Pins Spent to the left, Expected to the right */
+    align-items: flex-end;
+  }
+
+  .spent {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .expected {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end; /* Forces text inside the column to the right */
+    text-align: right;
+  }
+
+  .spent h4, .expected h4 {
+    margin: 0 0 4px 0;
+    font-size: 0.80rem;
+    color: #64748b;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    font-weight: 600;
+  }
+
+  .spent h5, .expected h5 {
+    margin: 0;
+    font-size: 1.4rem;
+    color: #0f172a;
+    font-weight: 700;
+  }
+
+  /* Progress Bar */
+  .progress-bar-wrapper {
+    width: 100%;
+    height: 10px;
+    background-color: #e2e8f0;
+    border-radius: 10px;
+    overflow: hidden;
+  }
+
+  .progress-bar {
+    width: 45%; 
+    height: 100%;
+    background-color: #4a90e2; 
+    border-radius: 10px;
+    transition: width 0.3s ease;
+  }
+
+  .leftover {
+    font-size: 0.85rem;
+    color: #64748b;
+    text-align: right;
+  }
+
+  /* Dropdown Toggle */
+  .card-dropdown {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 6px;
+    padding: 14px 20px;
+    background-color: #f8fafc; /* Matches header for symmetry */
+    border-top: 1px solid #e2e8f0;
+    color: #64748b;
+    font-size: 0.9rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background-color 0.2s ease, color 0.2s ease;
+  }
+
+  .card-dropdown:hover {
+    background-color: #f1f5f9;
+    color: #0f172a;
+  }
+
+  /* ===== 5. Expense Items (Details Section) ===== */
+  .details-section {
+    padding: 0 20px 10px 20px;
+    background-color: #f8fafc; /* Creates a nice 'drawer' effect when opened */
+  }
+
+  .details-section ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .expense-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 14px 0;
+    border-bottom: 1px solid #e2e8f0;
+  }
+
+  .expense-item:last-child {
+    border-bottom: none;
+  }
+
+  .expense-info {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  .expense-name {
+    font-weight: 600;
+    color: #1e293b;
+    font-size: 0.95rem;
+  }
+
+  .expense-date {
+    font-size: 0.8rem;
+    color: #64748b;
+  }
+
+  .expense-action {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .expense-amount {
+    font-weight: 700;
+    color: #0f172a;
+  }
+
+  .expense-action .icon-btn {
+    background: transparent;
+    border: none;
+    padding: 4px;
+    cursor: pointer;
+    color: #9ca3af;
+    display: flex;
+    align-items: center;
+    border-radius: 6px;
+  }
+  
+  .expense-action .icon-btn:hover {
+    background-color: #e2e8f0;
+    color: #1e293b;
+  }
 }

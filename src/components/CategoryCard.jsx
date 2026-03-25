@@ -53,73 +53,7 @@ export const CategoryCard = ({category}) => {
             </ul>
         </section>
         }
-        {/* --- TEMPORARY LAYOUT CSS --- */}
-      {/* Keeping strictly to display, flex/grid, gap, and alignment. 
-          Added a basic border/padding just so you can see the card's physical boundaries. */}
-      <style>{`
-        .category-card {
-          display: flex;
-          flex-direction: column;
-          gap: 1rem;
-          padding: 1rem;
-          border: 1px solid #e5e7eb;
-          border-radius: 12px;
-          overflow: hidden; /* Prevents square corners from child elements poking out */
-        }
-        
-        .category-header {
-          display: flex;
-          justify-content: space-between;
-          align-items: center;
-        }
-
-        .subtotal-wrapper {
-          display: flex;
-          flex-direction: column;
-          gap: 0.75rem;
-        }
-
-        .top-row {
-          display: grid;
-          grid-template-columns: 1fr 1fr; /* Two equal columns */
-          gap: 1rem;
-        }
-
-        .spent, .expected {
-          display: flex;
-          flex-direction: column;
-        }
-
-        .card-dropdown {
-          display: flex;
-          justify-content: space-between;
-          align-items: center;
-          cursor: pointer;
-          padding: 0.5rem 0; /* Makes it easier to tap on mobile */
-        }
-
-        .details-section {
-          display: flex;
-          flex-direction: column;
-        }
-
-        /* Temporary dummy styling for the progress bar so it's visible */
-        .progress-bar-wrapper {
-          width: 100%;
-          height: 8px;
-          background-color: #f3f4f6;
-          border-radius: 4px;
-        }
-        .progress-bar {
-          width: 45%; 
-          height: 100%;
-          background-color: #3b82f6;
-          border-radius: 4px;
-        }
-      `}</style>
     </article>
-
-
   )
 }
 
