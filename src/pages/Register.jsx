@@ -26,6 +26,7 @@ export const Register = () => {
       return val !== undefined && val !== "";
     });
 
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     setIsFormOk(allFieldsValid && allFieldsFilled);
   }, [formData, formValidity]);
 

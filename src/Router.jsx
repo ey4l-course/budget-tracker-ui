@@ -1,4 +1,4 @@
-import { createBrowserRouter, redirect } from "react-router-dom";
+import { createBrowserRouter } from "react-router-dom";
 import { Login } from "./pages/Login";
 import { Register } from "./pages/Register";
 import { Public } from "./layouts/Public";
@@ -6,17 +6,18 @@ import { Protected } from "./layouts/Protected";
 import { Dashboard } from "./pages/Dashboard";
 import { Profiles } from "./pages/Profiles";
 import { StaticError } from "./pages/StaticError";
+import { NewUserInit } from "./pages/NewUserInit";
 
 const BASE = import.meta.env.VITE_API_BASE;
 
-const requireAuth = async () => {
-  console.log(BASE);
-  const res = await fetch (BASE+"/auth/check-session", { credentials: "include" });
-  if (!res.ok) throw redirect ("/login");
-  return null;
-};
+// const requireAuth = async () => {
+//   console.log(BASE);
+//   const res = await fetch (BASE+"/auth/check-session", { credentials: "include" });
+//   if (!res.ok) throw redirect ("/login");
+//   return null;
+// };
 
-export default createBrowserRouter([
+const router = createBrowserRouter([
   {
     path: "/",
     element: <Public />,
@@ -36,7 +37,10 @@ export default createBrowserRouter([
     [
       {index: true, element: <Dashboard />},
       {path: "dashboard", element: <Dashboard />},
-      {path: "profile", element: <Profiles />}
+      {path: "profile", element: <Profiles />},
+      {path: "new-user", element: <NewUserInit />}
     ]
   }
 ]);
+
+export default router;

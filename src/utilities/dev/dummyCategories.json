@@ -1,0 +1,44 @@
+[
+  {
+    "username": null,
+    "categoryName": "leisure",
+    "categoryType": "EXPENSE",
+    "amount": 0.08,
+    "manual": true
+  },
+  {
+    "username": null,
+    "categoryName": "groceries",
+    "categoryType": "EXPENSE",
+    "amount": 0.12,
+    "manual": true
+  },
+  {
+    "username": null,
+    "categoryName": "vehicle",
+    "categoryType": "EXPENSE",
+    "amount": 0.15,
+    "manual": true
+  },
+  {
+    "username": null,
+    "categoryName": "vacations",
+    "categoryType": "EXPENSE",
+    "amount": 0.05,
+    "manual": true
+  },
+  {
+    "username": null,
+    "categoryName": "education",
+    "categoryType": "EXPENSE",
+    "amount": 0.1,
+    "manual": true
+  },
+  {
+    "username": null,
+    "categoryName": "housing",
+    "categoryType": "EXPENSE",
+    "amount": 0.3,
+    "manual": true
+  }
+]

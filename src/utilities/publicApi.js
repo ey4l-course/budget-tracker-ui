@@ -74,12 +74,15 @@ export const login = async (user) => {
         )
         const logID = res.headers.get("X-log-ID") || null;
         const data = await res.json();
-        const givenName= data.givenName || "";
-        const surname= data.surname || "";
+        const givenName = data.givenName || "";
+        const surname = data.surname || "";
+        const isActive = data.activated;
         if (res.status === 500 || res.status === 200){
                 return {
                     do: "nav",
-                    path: res.status === 200 ? "/app/dashboard" : "/error",
+                    path: res.status === 200 
+                        ? isActive ? "/app/dashboard" : "/app/new-user"
+                        : "/error",
                     message: res.status === 200
                         ? [givenName, surname].filter(Boolean).join(" ")
                         : "Internal server error",

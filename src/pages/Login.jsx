@@ -23,6 +23,7 @@ export const Login = () => {
       if (res.path != "/error"){
         sessionStorage.setItem("name", res.message);
       }
+      // console.log(res.message);
       navigate(`${res.path}`, {state: {logId: res.logID, message: res.message}})
     }
     setPending(false);

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { Outlet, replace, useLocation, useNavigate } from 'react-router-dom'
+import { Outlet, useLocation, useNavigate } from 'react-router-dom'
 import "./Protected.css"
 import mainMenu from "../assets/menu.svg"
 import {whoAmI} from "../utilities/ProtectedApi.js"
@@ -7,9 +7,13 @@ import {whoAmI} from "../utilities/ProtectedApi.js"
 export const Protected = () => {
   const location = useLocation();
   const STATE = location.state;
-  const nav = useNavigate();
-  const [loggedUser, setLoggedUser] = useState(null);
-  const [pending, setPending] = useState (true);
+  const navigate = useNavigate();
+  const [loggedUser, setLoggedUser] = useState(
+    () => STATE?.message?.name || sessionStorage.getItem("name") || null
+  );
+  const [pending, setPending] = useState (
+    () => !(STATE?.message?.name || sessionStorage.getItem("name"))
+  );
   
 const sysTime = new Date().getHours();
 
@@ -21,28 +25,18 @@ const dayTime = (
 );
 
   useEffect (() => {
-    let currentName = null;
-    currentName = STATE?.name || null;
-    if (!currentName)
-      currentName = sessionStorage.getItem("name");
-    if (currentName){
-      setLoggedUser(currentName);
-      setPending(false);
-    }
-
     const verifySession = async () => {
-      const fromServer = "John Doe"
-      // await whoAmI();
+      const fromServer = await whoAmI();
       if (fromServer){
         setLoggedUser(fromServer);
         setPending(false);
       }else{
         sessionStorage.clear();
-        nav ("/login", {state: {message: "Session expired"}}, {replace: true})
+        navigate ("/login", {state: {message: "Session expired"}, replace: true})
       }
     }
-    verifySession(nav, STATE);
-  },[])
+    verifySession();
+  },[navigate])
 
   return (
     <div className="protected-layout-root">
