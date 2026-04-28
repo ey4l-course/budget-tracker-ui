@@ -1,13 +1,15 @@
 import React, { useState } from 'react'
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { login } from '../utilities/publicApi';
 
 export const Login = () => {
+  const location = useLocation();
+  const STATE = location.state;
   const navigate = useNavigate ();
   const [userName, setUserName] = useState ("");
   const [password, setPassword] = useState ("");
   const [pending, setPending] = useState (false);
-  const [error, setError] = useState ("");
+  const [error, setError] = useState (STATE?.message);
 
   const handleLogin = async (e) => {
     e.preventDefault();
@@ -23,7 +25,6 @@ export const Login = () => {
       if (res.path != "/error"){
         sessionStorage.setItem("name", res.message);
       }
-      // console.log(res.message);
       navigate(`${res.path}`, {state: {logId: res.logID, message: res.message}})
     }
     setPending(false);

@@ -1,18 +1,15 @@
-import React, { useState } from 'react'
 import { ChevronLeft, ChevronRight, Calendar, RotateCcw } from 'lucide-react';
 
-export const MonthPicker = () => {
-    const [currentDate, setCurrentDate] = useState(new Date());
-
+export const MonthPicker = ({value, onChange}) => {
     const handleMonthChange = (direction) => {
-        const newDate = new Date(currentDate);
-        newDate.setMonth(currentDate.getMonth() + direction);
-        setCurrentDate(newDate);
+        const newDate = new Date(value);
+        newDate.setMonth(value.getMonth() + direction);
+        onChange(newDate);
     };
 
-    const resetToday = () => { setCurrentDate(new Date()); };
+    const resetToday = () => { onChange(new Date()); };
 
-    const displayDate = currentDate.toLocaleDateString('en-US', {
+    const displayDate = value.toLocaleDateString('en-US', {
         month: 'long',
         year: 'numeric'
     });

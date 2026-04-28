@@ -222,17 +222,24 @@
   }
 
   .progress-bar {
-    width: 45%; 
+    /* width: 45%;  */
     height: 100%;
     background-color: #4a90e2; 
     border-radius: 10px;
     transition: width 0.3s ease;
   }
 
-  .leftover {
-    font-size: 0.85rem;
+  .leftover-good {
+    font-size: 0.9rem;
     color: #64748b;
     text-align: right;
+  }
+
+  .leftover-bad {
+    font-size: 0.9rem;
+    color: #ff0000;
+    text-align: right;
+    font-weight: bolder;
   }
 
   /* Dropdown Toggle */
@@ -324,5 +331,18 @@
   .expense-action .icon-btn:hover {
     background-color: #e2e8f0;
     color: #1e293b;
+  }
+
+  @keyframes spin {
+    from {
+      transform: rotate(0deg);
+    }
+    to {
+      transform: rotate(360deg);
+    }
+  }
+
+  .lucide-spinner {
+    animation: spin 1s linear infinite;
   }
 }

@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { BankDetails } from "../components/BankDetails";
 import { ManualInit } from "../components/ManualInit";
-import './NewUserInit.css'
+import './NewUserInit.css';
 import { Bot, UserCog } from 'lucide-react';
 
 export const NewUserInit = () => {
