@@ -1,5 +1,15 @@
 /* FILE: src/assets/Protected.css */
 /* Minimal shell for the authenticated layout */
+
+@keyframes gear-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
 .protected-layout-root{
   .app-container {
     display: flex;
@@ -333,16 +343,19 @@
     color: #1e293b;
   }
 
-  @keyframes spin {
-    from {
-      transform: rotate(0deg);
-    }
-    to {
-      transform: rotate(360deg);
-    }
-  }
+/* Inside .protected-layout-root */
 
-  .lucide-spinner {
-    animation: spin 1s linear infinite;
+.lucide-spinner {
+    display: block !important;
+    margin: 24px auto !important;
+    width: 40px !important;
+    height: 40px !important;
+    color: #4a90e2 !important;
+    
+    /* Use the new unique name 'gear-spin' to avoid conflicts */
+    animation: gear-spin 1s linear infinite !important;
+    
+    /* Force the pivot point to the center of the icon */
+    transform-origin: center center !important;
   }
 }

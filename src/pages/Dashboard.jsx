@@ -10,12 +10,16 @@ export const Dashboard = () => {
   const nav = useNavigate();
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState (true);
-  const [month, setMonth] = useState (new Date());
-
+  const [month, setMonth] = useState (() => {
+    const today = new Date();
+    return new Date(today.getFullYear(), today.getMonth(), 1);
+  });
+  
   useEffect(() => {
     const dashboardData = async () => {
         setLoading(true);
-        const response = await fetchDashboardData("0");
+        await new Promise(resolve => setTimeout(resolve, 2000));
+        const response = await fetchDashboardData("warmup");
         if (response.do === "render"){
           setData(response.message);
           setLoading(false);
@@ -29,7 +33,7 @@ export const Dashboard = () => {
   const updateMonth = async (val) => {
     setMonth(val)
     setLoading(true);
-    const response = await fetchDashboardData(val.getMonth());
+    const response = await fetchDashboardData("fetch-dashboard", `${val.getFullYear()}-${String (val.getMonth() + 1).padStart(2,"0")}`);
     if (response.do === "render"){
       setData(response.message);
       setLoading(false);

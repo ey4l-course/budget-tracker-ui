@@ -74,12 +74,13 @@ export const submitLoginManual = async (expenses) => {
     }
 }
 
-export const fetchDashboardData = async (month) => {
+export const fetchDashboardData = async (flag, month) => {
     try {
-        const res = await fetch (`${BASE}/app/fetch-dashboard/${month}`,
+        const path = month ? `${BASE}/app/login?flag=${flag}&month=${month}` : `${BASE}/app/login?flag=${flag}`
+        const res = await fetch (path,
             {
                 method: "GET",
-                credentials: "include"
+                credentials: "include",
             }
         )
        if (res.ok){

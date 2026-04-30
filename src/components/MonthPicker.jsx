@@ -2,17 +2,25 @@ import { ChevronLeft, ChevronRight, Calendar, RotateCcw } from 'lucide-react';
 
 export const MonthPicker = ({value, onChange}) => {
     const handleMonthChange = (direction) => {
-        const newDate = new Date(value);
-        newDate.setMonth(value.getMonth() + direction);
+        const newDate = new Date(value.getFullYear(), value.getMonth() + direction, 1);
         onChange(newDate);
     };
 
-    const resetToday = () => { onChange(new Date()); };
+    const resetToday = () => { 
+        const today = new Date();
+        onChange(new Date(today.getFullYear(), today.getMonth(), 1));
+    };
 
     const displayDate = value.toLocaleDateString('en-US', {
         month: 'long',
         year: 'numeric'
     });
+
+    const isCurrent = () => {
+    const today = new Date();
+    return value.getFullYear() === today.getFullYear() && 
+            value.getMonth() === today.getMonth();
+    };
     
   return (
     <div className = "month-picker">
@@ -25,10 +33,11 @@ export const MonthPicker = ({value, onChange}) => {
             <span>{displayDate}</span>
         </div>
 
+        {!isCurrent() &&
         <button onClick={() => handleMonthChange(1)} className = "icon-btn">
             <ChevronRight size={20} />
         </button>
-
+        }
         <button onClick={resetToday} title='reset to today' className = "icon-btn reset-btn">
             <RotateCcw size={16} />
         </button>
