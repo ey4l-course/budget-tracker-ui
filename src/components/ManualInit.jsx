@@ -1,11 +1,12 @@
 import React, { useState } from 'react'
 import { initLoginManual, submitLoginManual } from '../utilities/ProtectedApi';
-import { useNavigate } from 'react-router-dom';
+import { data, useNavigate } from 'react-router-dom';
 import { Trash2, Plus, CheckCircle2 } from 'lucide-react';
 // import dummy from "../utilities/dev/dummyCategories.json"
 
 export const ManualInit = () => {
     const navigate = useNavigate();
+    const [pending, setPending] = useState(false);
     const [estimates, setEstimates] = useState ([]);
     const [fetchedData, setFetchedData] = useState ([]);
 
@@ -28,9 +29,15 @@ export const ManualInit = () => {
         );
     }
     const handleManual = async () => {
-        const data = await initLoginManual(estimates);
-        setFetchedData(data.map((item, index) => ({...item, id: index})
-        ));
+        setPending(true);
+        const response = await initLoginManual(estimates);
+        if (response.do === "render"){
+            const data = response.message;
+            setFetchedData(data.map((item, index) => ({...item, id: index})))
+            setPending(false)
+        }else{
+            navigate(`${response.path}`, {state: {logId: response.logID, message: response.message}});
+        };
     }
 
     const handleRemove = (id) => {
@@ -51,8 +58,8 @@ export const ManualInit = () => {
 
     const handleSubmit = async () => {
         const payload = fetchedData.map(({id,...rest}) => rest);
-        await submitLoginManual(payload);
-        navigate("/app/dashboard");
+        const res = await submitLoginManual(payload);
+        navigate(res.path, {state: {logId: res.logID, message: res.message}});
     }
 
   return (

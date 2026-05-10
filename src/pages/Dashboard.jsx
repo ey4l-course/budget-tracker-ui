@@ -38,7 +38,7 @@ export const Dashboard = () => {
       setData(response.message);
       setLoading(false);
     }else{
-      nav(`${response.path}`, {state: {logId: response.logID, message: response.message}});          
+      nav(`${response.path}`, {state: {logId: response.logID, message: response.message}});     
     }
   }
 

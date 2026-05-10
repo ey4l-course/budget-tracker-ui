@@ -10,13 +10,6 @@ import { NewUserInit } from "./pages/NewUserInit";
 
 const BASE = import.meta.env.VITE_API_BASE;
 
-// const requireAuth = async () => {
-//   console.log(BASE);
-//   const res = await fetch (BASE+"/auth/check-session", { credentials: "include" });
-//   if (!res.ok) throw redirect ("/login");
-//   return null;
-// };
-
 const router = createBrowserRouter([
   {
     path: "/",
