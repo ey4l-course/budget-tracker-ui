@@ -3,8 +3,11 @@ import { Outlet, useLocation, useNavigate } from 'react-router-dom'
 import "./Protected.css"
 import mainMenu from "../assets/menu.svg"
 import {whoAmI} from "../utilities/ProtectedApi.js"
+import { X, Menu } from 'lucide-react'
+import { MainMenu } from '../components/MainMenu.jsx'
 
 export const Protected = () => {
+  const [isMenuOpen, setIsMenuOpen] = useState (false);
   const location = useLocation();
   const STATE = location.state;
   const navigate = useNavigate();
@@ -38,6 +41,8 @@ const dayTime = (
     verifySession();
   },[navigate])
 
+  const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
+
   return (
     <div className="protected-layout-root">
       <div className="app-container">
@@ -52,11 +57,12 @@ const dayTime = (
               </p>
             )}
           </div>
-          <div className="main-menu">
-            <img src={mainMenu} alt='menu' />
+          <div className="main-menu" onClick={toggleMenu} style={{ cursor: `pointer`}}>
+            {isMenuOpen ? <X size={24}/> : <Menu size={24} />}
           </div>
         </div>
-        <div className="content-container">
+        {isMenuOpen && <MainMenu />}
+        <div className={`content-container ${isMenuOpen ? "blur-active" : ""}`}>
           {!pending && loggedUser && <Outlet />}
           {pending && <div className="pending-msg">Verifying session...</div>}
         </div>

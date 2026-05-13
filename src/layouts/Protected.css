@@ -358,4 +358,11 @@
     /* Force the pivot point to the center of the icon */
     transform-origin: center center !important;
   }
+
+  .content-container.blur-active {
+    filter: blur(4px);
+    opacity: 0.6;
+    pointer-events: none; /* Prevents interaction with dashboard while menu is open */
+    transition: filter 0.3s ease, opacity 0.3s ease;
+  }
 }
