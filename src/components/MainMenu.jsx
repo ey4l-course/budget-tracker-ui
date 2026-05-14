@@ -1,12 +1,17 @@
 import React from 'react'
 import "./MainMenu.css"
+import { MENU_CONFIG } from '../utilities/menuConfig';
 
-export const MainMenu = () => {
-    const menuItems = ["App settings", "Account settings", "Export cashflow", "Contact us", "Logout"];
+export const MainMenu = ({onClick}) => {
   return (
     <div className="menu-dropdown">
         <ul>
-            {menuItems.map(item => <li>{item}</li>)}
+            {MENU_CONFIG.map(item => (
+              <li
+                key={item.key}
+                onClick={() => onClick(item)}
+              >
+                {item.label}</li>))}
         </ul>
     </div>
     

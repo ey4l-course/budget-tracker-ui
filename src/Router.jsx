@@ -7,6 +7,8 @@ import { Dashboard } from "./pages/Dashboard";
 import { Profiles } from "./pages/Profiles";
 import { StaticError } from "./pages/StaticError";
 import { NewUserInit } from "./pages/NewUserInit";
+import { Settings } from "./pages/Settings";
+import { Export } from "./pages/Export";
 
 const BASE = import.meta.env.VITE_API_BASE;
 
@@ -31,7 +33,9 @@ const router = createBrowserRouter([
       {index: true, element: <Dashboard />},
       {path: "dashboard", element: <Dashboard />},
       {path: "profile", element: <Profiles />},
-      {path: "new-user", element: <NewUserInit />}
+      {path: "new-user", element: <NewUserInit />},
+      {path: "settings", element: <Settings />},
+      {path: "export", element: <Export />}
     ]
   }
 ]);

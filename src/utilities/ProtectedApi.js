@@ -101,7 +101,7 @@ export const fetchDashboardData = async (flag, month) => {
         const res = await fetch (path,
             {
                 method: "GET",
-                credentials: "include",
+                credentials: "include"
             }
         )
                 if (res.status === 401){
@@ -129,6 +129,33 @@ export const fetchDashboardData = async (flag, month) => {
         }
     } catch (e) {
         return errorHandler(e);
+    }
+}
+
+export const logout = async () => {
+    try {
+        const res = await fetch (`${BASE}/app/logout`,
+            {
+                method: "POST",
+                credentials: "include"
+            }
+        )
+        if (res.status === 401){
+            if (!refreshPromise)
+                refreshPromise = handleRefresh(); // lock mechanism
+            const refreshRes = await refreshPromise;
+            refreshPromise = null;
+            if (refreshRes.ok)
+                return logout(); //ONLY IF refresh succeedded run again.
+        }
+        const logID = res.headers.get("X-log-ID") || null;
+        return {
+            path: res.ok ? "/login" : "/error",
+            message: await res.text(),
+            logID: logID === null ? "Unable to retrieve log ID" : logID
+        }
+    }catch (e) {
+        errorHandler(e);
     }
 }
 

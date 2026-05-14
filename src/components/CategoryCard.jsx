@@ -29,7 +29,7 @@ export const CategoryCard = ({category}) => {
                     limit = {category.limitAmount}
                 />
                 {leftover > 0 && <div className="leftover-good"> You have {leftover}₪ left</div>}
-                {leftover < 0 && <div className="leftover-bad"> You are {leftover}₪ beyond budget</div>}
+                {leftover < 0 && <div className="leftover-bad"> You are {-leftover}₪ beyond budget</div>}
                 {leftover === 0 && <div className="leftover-good"> You have reached your budget limit</div>}
                 
             </div>

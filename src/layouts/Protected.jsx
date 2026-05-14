@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { Outlet, useLocation, useNavigate } from 'react-router-dom'
 import "./Protected.css"
 import mainMenu from "../assets/menu.svg"
-import {whoAmI} from "../utilities/ProtectedApi.js"
+import {logout, whoAmI} from "../utilities/ProtectedApi.js"
 import { X, Menu } from 'lucide-react'
 import { MainMenu } from '../components/MainMenu.jsx'
 
@@ -41,6 +41,21 @@ const dayTime = (
     verifySession();
   },[navigate])
 
+  const updateView = async (chosenView) => {
+    setIsMenuOpen(false);
+    if (chosenView.label === "Logout"){
+      sessionStorage.clear();
+      const res = await logout();
+      navigate(`${res.path}`, {state: {logId: res.logID, message: res.message}, replace: true });
+      return;
+    }
+    if (chosenView.label === "Contact us"){
+      window.location.href = chosenView.path;
+      return;
+    }
+    navigate(chosenView.path);
+  }
+  
   const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
 
   return (
@@ -61,7 +76,7 @@ const dayTime = (
             {isMenuOpen ? <X size={24}/> : <Menu size={24} />}
           </div>
         </div>
-        {isMenuOpen && <MainMenu />}
+        {isMenuOpen && <MainMenu onClick = {updateView}/>}
         <div className={`content-container ${isMenuOpen ? "blur-active" : ""}`}>
           {!pending && loggedUser && <Outlet />}
           {pending && <div className="pending-msg">Verifying session...</div>}
