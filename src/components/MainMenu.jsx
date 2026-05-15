@@ -1,6 +1,6 @@
 import React from 'react'
 import "./MainMenu.css"
-import { MENU_CONFIG } from '../utilities/menuConfig';
+import { MENU_CONFIG } from "../config/menuConfig.js"
 
 export const MainMenu = ({onClick}) => {
   return (

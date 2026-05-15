@@ -1,4 +1,5 @@
 import { EllipsisVertical } from 'lucide-react'
+import { formatCurrency } from '../utilities/Formatters'
 import React from 'react'
 
 export const ExpenseItem = ({expenseItem}) => {
@@ -11,7 +12,7 @@ export const ExpenseItem = ({expenseItem}) => {
         </div>
 
         <div className="expense-action">
-            <span className = "expense-amount">{expenseItem.amount}</span>
+            <span className = "expense-amount">{formatCurrency(expenseItem.amount)}</span>
             <button className = "icon-btn" aria-label = "Expense options">
                 <EllipsisVertical />
             </button>

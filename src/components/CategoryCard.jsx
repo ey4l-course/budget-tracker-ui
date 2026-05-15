@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import { ChevronDown, ChevronUp, EllipsisVertical } from 'lucide-react';
 import { ExpenseItem } from './ExpenseItem';
 import { ProgressBar } from './ProgressBar';
+import { formatCurrency } from '../utilities/Formatters';
 
 export const CategoryCard = ({category}) => {
   const [isOpen,setIsOpen] = useState(false);
@@ -17,19 +18,19 @@ export const CategoryCard = ({category}) => {
                 <div className="top-row">
                     <div className="spent">
                         <h4>Spent</h4>
-                        <h5>{category.subtotal}</h5>
+                        <h5>{formatCurrency(category.subtotal)}</h5>
                     </div>
                     <div className="expected">
                         <h4>Expected</h4>
-                        <h5>{category.limitAmount}</h5>
+                        <h5>{formatCurrency(category.limitAmount)}</h5>
                     </div>
                 </div>
                 <ProgressBar
                     subtotal = {category.subtotal}
                     limit = {category.limitAmount}
                 />
-                {leftover > 0 && <div className="leftover-good"> You have {leftover}₪ left</div>}
-                {leftover < 0 && <div className="leftover-bad"> You are {-leftover}₪ beyond budget</div>}
+                {leftover > 0 && <div className="leftover-good"> You have {formatCurrency(leftover)} left</div>}
+                {leftover < 0 && <div className="leftover-bad"> You are {formatCurrency(-leftover)} beyond budget</div>}
                 {leftover === 0 && <div className="leftover-good"> You have reached your budget limit</div>}
                 
             </div>
