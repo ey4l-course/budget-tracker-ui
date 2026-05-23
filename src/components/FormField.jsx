@@ -3,7 +3,7 @@ import { PwdHint } from './PwdHint';
 import { checkPasswordRules } from '../utilities/validator';
 import { checkUsername } from '../utilities/publicApi';
 
-export const FormField = ({name, type, value, placeholder, validator, onChange, onValidityChange}) => {
+export const FormField = ({name, type, value, placeholder, validator, onChange, onValidityChange, options}) => {
     const [focus, setFocus] = useState(false);
     const [error, setError] = useState("");
     const [pwdRules, setPwdRules] = useState({
@@ -34,7 +34,7 @@ export const FormField = ({name, type, value, placeholder, validator, onChange, 
 
     const handleInput = (e) => {
         const val = e.target.value;
-        const valid = validator(val);    
+        const valid = validator(val);
 
         onChange(name, val);
         onValidityChange(name, valid);
@@ -44,6 +44,7 @@ export const FormField = ({name, type, value, placeholder, validator, onChange, 
     }
   return (
     <div className="form-fields">
+      {type !== "select" &&
         <input
         name = {name}
         type = {type}
@@ -54,6 +55,28 @@ export const FormField = ({name, type, value, placeholder, validator, onChange, 
         onBlur={handleBlur}
         className={!value ? "" : (validator(value) && !error) ? "valid-field" : "invalid-field"}
         />
+      }
+      {type === "select" &&
+        <select
+          name = {name}
+          value={value || ""}
+          placeholder={placeholder}
+          onChange={handleInput}
+          onFocus={handleFocus}
+          onBlur={handleBlur}
+        >
+          <option value = "" disabled>{placeholder}</option>
+          {options && options.map(cat => (
+            <option
+              className = {cat.categoryType === "EXPENSE" ? "dropdown-expense" : "dropdown-income"}
+              key={cat.categoryName}
+              value={cat.categoryName}
+            >
+              {cat.categoryName}
+            </option>))}
+        </select>
+      }
+
         { name === "password" && focus &&(<PwdHint pwdRules = {pwdRules}/>)}
         { name === "username" && error && !focus && (<span>{error}</span>)}
     </div>

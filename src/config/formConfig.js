@@ -22,3 +22,11 @@ export const formFields =
     email: {type: "email", validator: validateMail, placeholder: "email"},
     address: addressFields
 }
+
+export const TxnModalFields = 
+{
+    date: {type: "date", validator: () => true, placeholder: "Date"},
+    txnName: {type: "text", validator: validateUsername, placeholder: "Description"},
+    txnCategory: {type: "select", validator: (v) => v !== "", placeholder: "Category"},
+    amount: {type: "number", validator: (v) => !isNaN(v), placeholder: "0.00"}
+}

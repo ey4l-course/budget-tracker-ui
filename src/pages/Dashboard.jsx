@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from 'react'
 import { useNavigate, Link } from 'react-router-dom';
+import "./Dashboard.css";
 import { MonthPicker } from '../components/MonthPicker';
 import { CategoryCard } from '../components/CategoryCard';
 import { fetchDashboardData } from '../utilities/ProtectedApi';
-import { Loader2 } from 'lucide-react';
+import { Loader2, Plus } from 'lucide-react';
 
 
 export const Dashboard = () => {
@@ -18,7 +19,7 @@ export const Dashboard = () => {
   useEffect(() => {
     const dashboardData = async () => {
         setLoading(true);
-        await new Promise(resolve => setTimeout(resolve, 2000));
+        await new Promise(resolve => setTimeout(resolve, 500));
         const response = await fetchDashboardData("warmup");
         if (response.do === "render"){
           setData(response.message);
@@ -42,12 +43,20 @@ export const Dashboard = () => {
     }
   }
 
+  const onOpenModal = () => {}
+
   return (
     <div className = "dashboard-view">
-      <MonthPicker
-        value={month}
-        onChange={updateMonth}
-      />
+      <div className="dashboard-controls">
+        <MonthPicker
+          value={month}
+          onChange={updateMonth}
+        />
+        <button className = "add-txn-btn" onClick={onOpenModal}>
+          <Plus size={20} />
+          <span>New transaction</span>
+        </button>  
+      </div>
       <div className="categories-list">
           { loading
           ? <Loader2
