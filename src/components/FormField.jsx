@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import { PwdHint } from './PwdHint';
 import { checkPasswordRules } from '../utilities/validator';
 import { checkUsername } from '../utilities/publicApi';
+import './FormField.css';
 
 export const FormField = ({name, type, value, placeholder, validator, onChange, onValidityChange, options}) => {
     const [focus, setFocus] = useState(false);

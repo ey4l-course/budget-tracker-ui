@@ -44,3 +44,6 @@ export const validateNumeric = (val) =>
 
 export const validateZip = (val) =>
   /^[0-9]{5,7}$/.test(val);
+
+export const validateAmount = (val) =>
+  /^\d+(\.\d{0,2})?$/.test(val)

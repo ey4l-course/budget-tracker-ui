@@ -4,12 +4,15 @@ import { FormField } from './FormField';
 import './TxnModal.css';
 import { TxnModalFields as data } from '../config/formConfig';
 
-export const TxnModal = ({ categories, onClose, addTxn, onSubmit }) => {
+export const TxnModal = ({ onClose, addTxn, onSubmit }) => {
     const [txnData, setTxnData] = useState({date: new Date().toISOString().split('T')[0]});
     const [formValidity, setFormValidity] = useState({date: true});
     const [isFormOk, setIsFormOk] = useState(false);
+    const [categories] = useState (() => {
+        const storedConfigs = sessionStorage.getItem("userConfigs");
+        return storedConfigs ? JSON.parse(storedConfigs) : [];
+    });
 
-    
     useEffect(() => {
         const allFieldsValid = Object.keys(data).every(field => {
             return formValidity[field] === true;
@@ -23,7 +26,7 @@ export const TxnModal = ({ categories, onClose, addTxn, onSubmit }) => {
     // eslint-disable-next-line react-hooks/set-state-in-effect
     setIsFormOk(allFieldsValid && allFieldsFilled);
     }, [txnData, formValidity]);
-    
+
     const handleFormSumbit = (e) => {
         e.preventDefault();
         onSubmit(txnData);
@@ -31,9 +34,10 @@ export const TxnModal = ({ categories, onClose, addTxn, onSubmit }) => {
 
     const handleMoreTxn = () => {
         addTxn(txnData);
+        
     }
 
-    const updateFormData = (name, value) => {    
+    const updateFormData = (name, value) => {
         setTxnData(prev => ({ ...prev, [name]: value }));
     };
     
@@ -42,7 +46,7 @@ export const TxnModal = ({ categories, onClose, addTxn, onSubmit }) => {
     };
 
   return (
-    <div className = "modal-backdrop" onClick={onClose}>
+    <div className = "modal-backdrop">
         <div className="modal-container" onClick={(e) => e.stopPropagation()}>
             
             <div className="modal-header">
@@ -67,9 +71,10 @@ export const TxnModal = ({ categories, onClose, addTxn, onSubmit }) => {
                             />
                         ))
                 }
-                <button type = "submit" disabled = { !isFormOk }>Submit</button>
-                <button onClick={handleMoreTxn} disabled = { !isFormOk }>Add transaction</button>
-                <button type="button" onClick={onClose}>Cancel</button>
+                <div className="form-fields buttons">
+                    <button type = "submit" disabled = { !isFormOk }>Submit</button>
+                    <button type = "button" onClick={handleMoreTxn} disabled = { !isFormOk }>Add transaction</button>
+                </div>
             </form>
         </div>
     </div>

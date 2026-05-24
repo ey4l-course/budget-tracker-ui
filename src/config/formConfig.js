@@ -1,5 +1,5 @@
 // formConfig
-import { validateMail, validateId, validatePassword,validateMobile, validateName, validateNumeric, validateUsername, validateZip } from "../utilities/validator.js"
+import { validateMail, validateId, validatePassword,validateMobile, validateName, validateNumeric, validateUsername, validateZip, validateAmount } from "../utilities/validator.js"
 
 const addressFields =
 {
@@ -28,5 +28,5 @@ export const TxnModalFields =
     date: {type: "date", validator: () => true, placeholder: "Date"},
     txnName: {type: "text", validator: validateUsername, placeholder: "Description"},
     txnCategory: {type: "select", validator: (v) => v !== "", placeholder: "Category"},
-    amount: {type: "number", validator: (v) => !isNaN(v), placeholder: "0.00"}
+    amount: {type: "number", validator: validateAmount, placeholder: "0.00"}
 }
