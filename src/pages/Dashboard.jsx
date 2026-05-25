@@ -67,10 +67,14 @@ export const Dashboard = () => {
   
   const submitNewTxns = async (txnData) => {
     const finalPayload = [...batchTxnPayload, txnData]
-    const res = await postBatchTxns(finalPayload);
-    console.log(res);
-    setBatchTxnPayload ([]);
-    setIsModalOpen (false);
+    const response = await postBatchTxns(finalPayload);
+    if (response.do === "nav"){
+      nav(`${response.path}`, {state: {logId: response.logID, message: response.message}});     
+    } else {
+      console.log(response.message);
+      setBatchTxnPayload ([]);
+      setIsModalOpen (false);
+    }
   }
 
   return (

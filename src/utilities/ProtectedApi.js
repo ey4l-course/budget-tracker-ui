@@ -131,46 +131,73 @@ export const fetchDashboardData = async (flag, month) => {
         return errorHandler(e);
     }
 }
-import dummyPayload from "../utilities/dev/dummyCategories.json"
+// import dummyPayload from "../utilities/dev/dummyCategories.json"
 export const fetchConfigs = async () => {
-    sessionStorage.setItem("userConfigs", JSON.stringify(dummyPayload));
-    return "ok";
-    // try {
-    //     const res = await fetch (`${BASE}/app/fetchConfigs`,
-    //         {
-    //             method: "GET",
-    //             credentials: "include"
-    //         }
-    //     )
-    //     if (res.status === 401){
-    //         if (!refreshPromise)
-    //             refreshPromise = handleRefresh();
-    //         const refreshRes = await refreshPromise;
-    //         refreshPromise = null;
-    //         if (refreshRes.ok)
-    //             return fetchConfigs();
-    //     }
-    //     if (res.ok){
-    //         const configs = await res.json();
-    //         sessionStorage.setItem("userConfigs", JSON.stringify(configs));
-    //         return "ok";
-    //     }else {
-    //         const logID = res.headers.get("X-log-ID") || null;
-    //         const message = await res.text();
-    //         return {
-    //             do: "nav",
-    //             path: res.status === 403 || res.status === 401 ? "/login" : "/error",
-    //             message: message,
-    //             logID: logID === null ? "Unable to retrieve log ID" : logID
-    //         }   
-    //     }
-    // }catch (e) {
-    //     return errorHandler(e);
-    // }
+    // sessionStorage.setItem("userConfigs", JSON.stringify(dummyPayload));
+    // return "ok";
+    try {
+        const res = await fetch (`${BASE}/app/fetch-budget-configs`,
+            {
+                method: "GET",
+                credentials: "include"
+            }
+        )
+        if (res.status === 401){
+            if (!refreshPromise)
+                refreshPromise = handleRefresh();
+            const refreshRes = await refreshPromise;
+            refreshPromise = null;
+            if (refreshRes.ok)
+                return fetchConfigs();
+        }
+        if (res.ok){
+            const configs = await res.json();
+            sessionStorage.setItem("userConfigs", JSON.stringify(configs));
+            return "ok";
+        }else {
+            const logID = res.headers.get("X-log-ID") || null;
+            const message = await res.text();
+            return {
+                do: "nav",
+                path: res.status === 403 || res.status === 401 ? "/login" : "/error",
+                message: message,
+                logID: logID === null ? "Unable to retrieve log ID" : logID
+            }   
+        }
+    }catch (e) {
+        return errorHandler(e);
+    }
 }
 
 export const postBatchTxns = async (batch) => {
-    console.log(batch);
+    try{
+        const res = await fetch(`${BASE}/app/new-txn`, 
+            {
+                method: "POST",
+                credentials: "include",
+                headers: HEADERS,
+                body: JSON.stringify(batch)
+            }
+        )
+        if (res.status === 401){
+            if (!refreshPromise)
+                refreshPromise = handleRefresh();
+            const refreshRes = await refreshPromise;
+            refreshPromise = null;
+            if (refreshRes.ok)
+                return postBatchTxns(batch);
+        }
+        const message = await res.text();
+        const logID = res.headers.get("X-log-ID") || null;
+        return {
+            do: res.ok ? "render" : "nav",
+            path: res.status === 403 || res.status === 401 ? "/login" : "/error",
+            message: message,
+            logID: logID === null ? "Unable to retrieve log ID" : logID
+        }
+    }catch (e) {
+        return errorHandler(e);
+    }
 }
 
 export const logout = async () => {
